@@ -1,0 +1,84 @@
+import React, { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+import gsap from "gsap";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const Hero = () => {
+  const contentRef = useRef();
+
+  useGSAP(() => {
+    // Animate content in
+    gsap.from(contentRef.current.children, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power3.out"
+    });
+  }, []);
+
+  return (
+    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
+      {/* Content Overlay */}
+      <div ref={contentRef} className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 text-center text-white">
+        <div className="max-w-4xl">
+          <h1 className="mb-4 text-4xl font-bold md:text-6xl lg:text-7xl">
+            <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+              Emmy Tresor
+            </span>
+          </h1>
+          
+          <h2 className="mb-6 text-xl text-gray-300 md:text-2xl">
+            Software Developer | AI & IoT Innovator | Problem-Solver
+          </h2>
+          
+          <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-300">
+            I build technology that empowers people, solves real problems, and opens opportunities for communities — starting with Africa.
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="#contact"
+              className="rounded-lg bg-blue-600 px-8 py-3 font-medium text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/20"
+            >
+              Get In Touch
+            </a>
+            <a
+              href="#projects"
+              className="rounded-lg border-2 border-gray-600 bg-transparent px-8 py-3 font-medium text-white transition-all hover:border-blue-500 hover:bg-gray-800/50"
+            >
+              View My Work
+            </a>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <a 
+          href="#about" 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-400 hover:text-white transition-colors"
+        >
+          <div className="flex flex-col items-center">
+            <span className="mb-2 text-sm">Scroll Down</span>
+            <svg 
+              className="h-6 w-6 animate-bounce" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M19 14l-7 7m0 0l-7-7m7 7V3" 
+              />
+            </svg>
+          </div>
+        </a>
+      </div>
+    </div>
+  );
+};
+
+export default Hero;
